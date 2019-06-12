@@ -26,9 +26,9 @@ export class AlbumPage extends Component {
     this.props.getUsers();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { users, albums } = this.props;
-    if (users !== prevProps.users) {
+  static getDerivedStateFromProps(props, state) {
+    const { users, albums } = props;
+    if (props.albums !== state.albums) {
       const tempArray = [];
       users.forEach((user) => DEFAULT_COLOR_PALLETTE.forEach((pallette) => albums.forEach((album) => {
         if((user.id === album.userId) && (pallette.userId === album.userId)) {
@@ -41,9 +41,9 @@ export class AlbumPage extends Component {
           })
         }
       })));
-      this.setState({
+      return {
         albums: tempArray
-      })
+      }
     }
   }
 
@@ -81,6 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 AlbumPage.defaultProps = {
   albums: [],
+  users: [],
 }
 
 
