@@ -8,4 +8,4 @@ export const setAlbums = (albums) => ({
 export const getAlbums = () => {
  return dispatch => axios.get('https://jsonplaceholder.typicode.com/albums').then((res) => {
    dispatch(setAlbums(res.data));
-})}; 
+})};
