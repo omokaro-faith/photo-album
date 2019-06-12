@@ -1,11 +1,9 @@
-const initialState = {
-  albums:[]
-}
+const initialState = {}
 
  export default (state= initialState, action) => {
  switch (action.type) {
    case 'GET_ALBUMS':
-   const { albums } = action; 
+   const { albums } = action;
      return {...state, albums};
    default:
      return state;

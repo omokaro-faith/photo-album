@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
- import Header from '../components/Header';
-import AlbumPage from '../components/AlbumPage';
-import PhotoPage from '../components/PhotoPage';
-import NotFoundPage from '../components/NotFoundPage';
+ import Header from '../components/header/Header';
+import AlbumPage from '../components/album/AlbumPage';
+import PhotoPage from '../components/photo/PhotoPage';
+import NotFoundPage from '../components/notfound/NotFoundPage';
 
 
  const AppRoute = () => (
