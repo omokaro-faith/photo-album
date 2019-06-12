@@ -6,6 +6,13 @@ export const setAlbums = (albums) => ({
 });
 
 export const getAlbums = () => {
- return dispatch => axios.get('https://jsonplaceholder.typicode.com/albums').then((res) => {
-   dispatch(setAlbums(res.data));
-})};
+  return async dispatch => {
+    try {
+     const albums = await axios.get('https://jsonplaceholder.typicode.com/albums')
+     return dispatch(setAlbums(albums.data));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+ };
+ 
