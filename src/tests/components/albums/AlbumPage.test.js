@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AlbumPage } from '../../../components/album/AlbumPage';
 
-describe("AlbumPage", () => {
+describe('AlbumPage', () => {
   let props;
   let wrapper;
 
@@ -13,7 +13,7 @@ describe("AlbumPage", () => {
       getUsers: jest.fn(),
       getAlbums: jest.fn(),
     };
-    wrapper = shallow(<AlbumPage {...props} />);
+    wrapper = shallow(<AlbumPage {...props}/>);
   });
 
   afterEach(() => { wrapper = null; });
@@ -34,7 +34,9 @@ describe("AlbumPage", () => {
         title: 'lorem ipsum',
         color: '#000fff',
         userName: 'Omokaro Faith',
-        albumId: 2
+        albumId: 2,
+        albumsPerPage: 10,
+        currentPage: 1,
       });
 
       const result = {
@@ -44,6 +46,8 @@ describe("AlbumPage", () => {
         userName: 'Omokaro Faith',
         albumId: 2,
         albums: [],
+        albumsPerPage: 10,
+        currentPage: 1,
       };
 
       expect(wrapper.state()).toEqual(result);
