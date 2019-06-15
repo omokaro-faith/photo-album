@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import Button from '../pagination/Button';
+import Dropdown from '../pagination/Dropdown';
 import { getAlbums }  from '../../actions/albums';
 import { getUsers }  from '../../actions/users';
 import { DEFAULT_COLOR_PALLETTE } from './constants';
+import { getPageNumbers, getCurrentAlbums } from '../../utils/utils'
 import './album.css';
 
 export class AlbumPage extends Component {
@@ -11,7 +14,11 @@ export class AlbumPage extends Component {
     super(props);
     this.state = {
       albums: [],
+      currentPage: 1,
+      albumsPerPage: 10,
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   static propTypes = {
@@ -47,22 +54,53 @@ export class AlbumPage extends Component {
     }
   }
 
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
+  handleChange(event) {
+    this.setState({
+      albumsPerPage: event.target.value,
+      currentPage: 1,
+    })
+  }
+
   render() {
-    const { albums } = this.state;
+    const { albums, currentPage, albumsPerPage } = this.state;
+    const renderAlbums = getCurrentAlbums(currentPage, albumsPerPage, albums).map((album, index) => 
+    (
+      <div key={index} className="grid__item">
+        <div className="grid__img">
+          <img src={`https://via.placeholder.com/150/${album.color}`} alt="" title=""/>   
+        </div>
+        <h4>Title: {album.title}</h4>
+        <h4>UserName: {album.userName}</h4>  
+      </div>
+    ));
+
+    const renderPageNumbers = getPageNumbers(albums, albumsPerPage).map(number => {
+      return (
+        <Button
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+          pageNumber={number}
+        />
+      );
+    });
+
     return (
       <section className="grid">
         <div className="grid__container">
-          {
-            albums.map((album, index) => (
-              <div key={index} className="grid__item">
-                <div className="grid__img">
-                  <img src={`https://via.placeholder.com/150/${album.color}`} alt="" title=""/>   
-                </div>
-                <h4>Title: {album.title}</h4>
-                <h4>UserName: {album.userName}</h4>  
-              </div>
-            ))
-          }
+          {renderAlbums}
+          <ul id="page-numbers">
+            {renderPageNumbers}
+          </ul>
+        </div>
+        <div>
+         <Dropdown handleChange={this.handleChange}/>
         </div>
       </section>  
     );
