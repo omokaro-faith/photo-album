@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AlbumPage } from '../../../components/album/AlbumPage';
+import albums from '../../fixtures/albums';
+import users from '../../fixtures/users';
 
 describe('AlbumPage', () => {
   let props;
@@ -9,7 +11,6 @@ describe('AlbumPage', () => {
   beforeEach(() => {
     props = {
       users: [],
-      albums: [],
       getUsers: jest.fn(),
       getAlbums: jest.fn(),
     };
@@ -27,30 +28,60 @@ describe('AlbumPage', () => {
     it('should not have any regressions', () => {
       expect(wrapper).toMatchSnapshot();
     });
+    describe('getDerivedStateFromProps', () => {
+      it('should call getDerivedStateFromProps', () => {
+        const props = { albums, users };
+        const state = { albums: [] };
 
-    it('sets albums', () => {
-      wrapper.setState({
-        userId: 1,
-        title: 'lorem ipsum',
-        color: '#000fff',
-        userName: 'Omokaro Faith',
-        albumId: 2,
-        albumsPerPage: 10,
-        currentPage: 1,
+        const expected =
+            {
+               albums:  [
+                  {
+                   albumId: 1,
+                   color: 'CC6699',
+                   owner: 'Leanne Graham',
+                   title: 'This fall apart',
+                   userId: 1,
+                   userName: 'air',
+                 },
+                  {
+                   albumId: 2,
+                   color: 'F1B02F',
+                   owner: 'Ervin Howell',
+                   title: 'Bisi goes to school',
+                   userId: 2,
+                   userName: 'wind',
+                 },
+                  {
+                   albumId: 3,
+                   color:'EADE84',
+                   owner: 'Teni askamaya',
+                   title: 'The church hill',
+                   userId: 3,
+                   userName: 'sea',
+                 },
+                  {
+                   albumId: 4,
+                   color: 'A3D064',
+                   owner: 'dauty',
+                   title: 'dauty',
+                   userId: 4,
+                   userName: 'asa',
+                 },
+                  {
+                   albumId: 5,
+                   color: '11B2AA',
+                   owner: 'kelly rowrow',
+                   title: 'kelly rowrow',
+                   userId: 5,
+                   userName: 'cornrow',
+                 },
+               ],
+        };
+
+        const result = AlbumPage.getDerivedStateFromProps(props, state);
+        expect(result).toEqual(expected);
       });
-
-      const result = {
-        userId: 1,
-        title: 'lorem ipsum',
-        color: '#000fff',
-        userName: 'Omokaro Faith',
-        albumId: 2,
-        albums: [],
-        albumsPerPage: 10,
-        currentPage: 1,
-      };
-
-      expect(wrapper.state()).toEqual(result);
     });
   });
 })

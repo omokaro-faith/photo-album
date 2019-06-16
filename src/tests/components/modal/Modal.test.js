@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from '../../../components/pagination/Button';
+import Modal from '../../../components/modal/Modal';
 
 describe('Button', () => {
   let props;
@@ -8,11 +8,11 @@ describe('Button', () => {
 
   beforeEach(() => {
     props = {
-      handleClick: jest.fn(),
-      id: 1,
-      pageNumber: 2
+      handleClose: jest.fn(),
+      show: true,
+      children: [],
     };
-    wrapper = shallow(<Button {...props}/>);
+    wrapper = shallow(<Modal {...props}/>);
   });
 
   afterEach(() => { wrapper = null; });
@@ -28,11 +28,11 @@ describe('Button', () => {
     });
   });
 
-  describe('handleClick', () => {
-  it('should call props.handleClick', () => {
-    const li = wrapper.find('li');
-    li.simulate('click');
-    expect(props.handleClick).toHaveBeenCalled();
+describe('handleClose', () => {
+  it('should call props.handleClose', () => {
+    const button = wrapper.find('button');
+    button.simulate('click');
+    expect(props.handleClose).toHaveBeenCalled();
     });
   });
 });

@@ -1,4 +1,4 @@
-import { getPageNumbers, getCurrentAlbums } from '../../utils/utils';
+import { getPageNumbers, getCurrentItems } from '../../utils/utils';
 import albums from '../fixtures/albums';
 
 describe('getPageNumbers', () => {
@@ -17,7 +17,7 @@ describe('getPageNumbers', () => {
   });
 });
 
-describe('getCurrentAlbums', () => {
+describe('getCurrentItems', () => {
   it('returns an array containing current items on the page', () => {
     const albumsPerPage = 3;
     const currentPage = 1;
@@ -25,18 +25,21 @@ describe('getCurrentAlbums', () => {
       {
       id: 1,
       title: 'This fall apart',
+      userId: 1,
      },
      {
       id: 2,
-      name: 'Bisi goes to school',
+      title: 'Bisi goes to school',
+      userId: 2,
      },
      {
       id: 3,
-      name: 'The church hill',
+      title: 'The church hill',
+      userId: 3,
      },
   ];
 
-    expect(getCurrentAlbums(currentPage, albumsPerPage, albums)).toEqual(expected);
+    expect(getCurrentItems(currentPage, albumsPerPage, albums)).toEqual(expected);
   });
 
   it('returns an empty array when page content is empty', () => {
@@ -44,6 +47,6 @@ describe('getCurrentAlbums', () => {
     const currentPage = 1;
     const expected = [];
 
-    expect(getCurrentAlbums(currentPage, albumsPerPage, [])).toEqual(expected);
+    expect(getCurrentItems(currentPage, albumsPerPage, [])).toEqual(expected);
   });
 });

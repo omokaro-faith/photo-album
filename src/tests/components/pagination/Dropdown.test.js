@@ -25,4 +25,12 @@ describe('Dropdown', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
-})
+
+  describe('handleChange', () => {
+    it('should call props.handleClick', () => {
+      const select = wrapper.find('select');
+      select.simulate('change');
+      expect(props.handleChange).toHaveBeenCalled();
+    });
+  });
+});

@@ -3,7 +3,7 @@ import albums from '../fixtures/albums';
 
 describe('albumReducer', () => {
   test('should set up default values', () => {
-    const state = albumReducer(undefined, {type: '@@INIT'});
+    const state = albumReducer(undefined, { type: '@@INIT'});
     expect(state).toEqual({});
   });
   
