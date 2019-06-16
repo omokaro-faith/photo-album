@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
-import Button from '../pagination/Button';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Dropdown from '../pagination/Dropdown';
+import Buttons from '../pagination/Button';
 import { getAlbums }  from '../../actions/albums';
 import { getUsers }  from '../../actions/users';
-import { DEFAULT_COLOR_PALLETTE } from './constants';
-import { getPageNumbers, getCurrentAlbums } from '../../utils/utils'
-import './album.css';
+import { DEFAULT_COLOR_PALLETTE, ITEMS_PER_PAGE } from '../../constants/constants';
+import { getPageNumbers, getCurrentItems } from '../../utils/utils';
 
 export class AlbumPage extends Component {
   constructor(props) {
@@ -15,43 +15,58 @@ export class AlbumPage extends Component {
     this.state = {
       albums: [],
       currentPage: 1,
-      albumsPerPage: 10,
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   static propTypes = {
     getAlbums: PropTypes.func.isRequired,
     getUsers:  PropTypes.func.isRequired,
-    users: PropTypes.array,
-    albums: PropTypes.array,
-  }
+    users: PropTypes.array.isRequired,
+    albums: PropTypes.array.isRequired,
+  };
+
+  static defaultProps = {
+    albums: [],
+    users: [],
+  };
 
   componentDidMount() {
-    this.props.getAlbums();
-    this.props.getUsers();
+    const { getAlbums, getUsers } = this.props;
+    getAlbums();
+    getUsers();
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { users, albums } = props;
+    const { users, albums  } = props;
     if (props.albums !== state.albums) {
-      const tempArray = [];
+      const storage = [];
       users.forEach((user) => DEFAULT_COLOR_PALLETTE.forEach((pallette) => albums.forEach((album) => {
         if((user.id === album.userId) && (pallette.userId === album.userId)) {
-          tempArray.push({
+          storage.push({
             userName: user.username,
             title: album.title,
             userId: album.userId,
             albumId: album.id,
-            color: pallette.color
+            color: pallette.color,
+            owner: user.name
           })
         }
       })));
       return {
-        albums: tempArray
+        albums: storage,
       }
     }
+  }
+
+
+  handleChange(event) {
+    const { getAlbums } = this.props;
+    getAlbums(event.target.value);
+    this.setState({
+      currentPage: 1,
+    });
   }
 
   handleClick(event) {
@@ -60,55 +75,50 @@ export class AlbumPage extends Component {
     });
   }
 
-  handleChange(event) {
-    this.setState({
-      albumsPerPage: event.target.value,
-      currentPage: 1,
-    })
-  }
-
   render() {
-    const { albums, currentPage, albumsPerPage } = this.state;
-    const renderAlbums = getCurrentAlbums(currentPage, albumsPerPage, albums).map((album, index) => 
+    const { albums, currentPage } = this.state;
+    const renderAlbums = getCurrentItems(currentPage, ITEMS_PER_PAGE, albums).map((album, index) => 
     (
       <div key={index} className="grid__item">
+      <Link to={{
+          pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
+          state: { AlbumPage: true },
+        }}
+        >
         <div className="grid__img">
-          <img src={`https://via.placeholder.com/150/${album.color}`} alt="" title=""/>   
+          <img src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
         </div>
+        </Link>
         <h4>Title: {album.title}</h4>
-        <h4>UserName: {album.userName}</h4>  
+        <h4>UserName: {album.userName}</h4>
       </div>
     ));
 
-    const renderPageNumbers = getPageNumbers(albums, albumsPerPage).map(number => {
-      return (
-        <Button
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-          pageNumber={number}
-        />
-      );
-    });
+    const renderPageNumbers = getPageNumbers(albums, ITEMS_PER_PAGE).map((number) => (
+       <Buttons 
+        key={number}
+        id={number}
+        handleClick={this.handleClick}
+        pageNumber={number}
+       />
+    ))
 
     return (
       <section className="grid">
-        <div className="grid__container">
-          {renderAlbums}
-          <ul id="page-numbers">
-            {renderPageNumbers}
-          </ul>
-        </div>
         <div>
          <Dropdown handleChange={this.handleChange}/>
-        </div>
+        {renderPageNumbers}
+       </div>
+       <div className="grid__container">
+        {renderAlbums}
+       </div>
       </section>  
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getAlbums: () => dispatch(getAlbums()),
+  getAlbums: (limit) => dispatch(getAlbums(limit)),
   getUsers: () => dispatch(getUsers())
 });
 
@@ -116,11 +126,6 @@ const mapDispatchToProps = (dispatch) => ({
   albums: state.albums.albums,
   users: state.users.users
 });
-
-AlbumPage.defaultProps = {
-  albums: [],
-  users: [],
-}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumPage);
