@@ -1,18 +1,18 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-const Button = ({id, onClick, pageNumber}) => (
+const Button = ({id, handleClick, pageNumber}) => (
   <li
     id={id}
-    onClick={onClick}
+    onClick={handleClick}
   >
-  {pageNumber}
+    {pageNumber}
   </li>
 )
 
 Button.propTypes = {
   id: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
   pageNumber: PropTypes.number.isRequired,
 }
 
