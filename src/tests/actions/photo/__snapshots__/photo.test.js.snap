@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Async getPhotos gets photos 1`] = `
+Array [
+  Object {
+    "photos": Array [],
+    "type": "GET_PHOTOS",
+  },
+]
+`;

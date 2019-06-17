@@ -29,7 +29,7 @@ describe('AlbumPage', () => {
       expect(wrapper).toMatchSnapshot();
     });
     describe('getDerivedStateFromProps', () => {
-      it('should call getDerivedStateFromProps', () => {
+      it('should set album data', () => {
         const props = { albums, users };
         const state = { albums: [] };
 
