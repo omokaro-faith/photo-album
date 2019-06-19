@@ -1,13 +1,18 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import '../../styles/components/paginations/_button.css';
 
 const Button = ({id, handleClick, pageNumber}) => (
-  <li
-    id={id}
-    onClick={handleClick}
-  >
-    {pageNumber}
-  </li>
+  <div className='buttonwrapper__item'>
+    <ul className='buttonwrapper__item--pagination'>
+      <ol
+        id={id}
+        onClick={handleClick}
+      >
+      {pageNumber}
+      </ol>
+    </ul> 
+  </div>
 )
 
 Button.propTypes = {

@@ -30,8 +30,8 @@ describe('Button', () => {
 
   describe('handleClick', () => {
   it('should call props.handleClick', () => {
-    const li = wrapper.find('li');
-    li.simulate('click');
+    const ol = wrapper.find('ol');
+    ol.simulate('click');
     expect(props.handleClick).toHaveBeenCalled();
     });
   });

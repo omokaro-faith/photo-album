@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './album.css';
+import './styles/base/base.css';
 import configureStore from './store/configureStore';
 import AppRoute from './routes/AppRoutes';
 import * as serviceWorker from './serviceWorker';
