@@ -27,7 +27,7 @@ describe('Async getUsers', () => {
     nock.cleanAll();
   });
 
-  it('gets photos',async () => {
+  it('gets users',async () => {
     nock('https://localhost:8000')
       .get('https://jsonplaceholder.typicode.com/users')
       .reply(200);

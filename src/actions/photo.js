@@ -5,12 +5,17 @@ export const setPhotos = photos => ({
   photos,
 });
 
+export const setPhotoError = () => ({
+  type: 'PHOTO_ERROR',
+  message: 'Cannot fetch photo'
+});
+
 export const getPhotos = (limit = 20, albumId) => async (dispatch) => {
   try {
     const photos = await axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}&_start=0&_limit=${limit}`);
     return dispatch(setPhotos(photos.data));
   } catch (error) {
-    console.log(error);
+    return(dispatch(setPhotoError()));
   }
 };
 

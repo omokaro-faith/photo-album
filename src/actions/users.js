@@ -5,13 +5,19 @@ export const setUsers = users => ({
   users,
 });
 
+export const setUsersError = () => ({
+  type: 'USER_ERROR',
+  message: 'Cannot fetch users'
+});
+
+
 
 export const getUsers = () => async (dispatch) => {
   try {
     const users = await axios.get('https://jsonplaceholder.typicode.com/users');
     return dispatch(setUsers(users.data));
   } catch (error) {
-    console.log(error);
+    return(dispatch(setUsersError()));
   }
 };
 

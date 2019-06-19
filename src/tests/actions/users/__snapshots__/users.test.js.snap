@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Async getUsers gets photos 1`] = `
+exports[`Async getUsers gets users 1`] = `
 Array [
   Object {
     "type": "GET_USERS",

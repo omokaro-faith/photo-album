@@ -5,6 +5,9 @@ const initialState = {}
    case 'GET_USERS':
    const { users } = action; 
      return {...state, users};
+   case 'USER_ERROR':
+   const { message } = action; 
+      return { ...state, message}
    default:
      return state;
  }
