@@ -8,6 +8,7 @@ import { getAlbums }  from '../../actions/albums';
 import { getUsers }  from '../../actions/users';
 import { DEFAULT_COLOR_PALLETTE, ITEMS_PER_PAGE } from '../../constants/constants';
 import { getPageNumbers, getCurrentItems } from '../../utils/utils';
+import Header from '../header/Header';
 
 export class AlbumPage extends Component {
   constructor(props) {
@@ -86,11 +87,14 @@ export class AlbumPage extends Component {
         }}
         >
         <div className="grid__img">
-          <img src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
+          <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
         </div>
         </Link>
-        <h4>Title: {album.title}</h4>
-        <h4>UserName: {album.userName}</h4>
+        <h5>Username: {album.userName} </h5>
+        <div className='tooltip'>
+        <h5>Title: {album.title}</h5>
+          <h4 className='tooltiptext'>{album.title} </h4>
+        </div>
       </div>
     ));
 
@@ -105,13 +109,17 @@ export class AlbumPage extends Component {
 
     return (
       <section className="grid">
-        <div>
-         <Dropdown handleChange={this.handleChange}/>
+        <Header totalItems={albums.length} pageName='Albums'/>
+        <div className='dropdown-button__wrapper'>
+         <Dropdown handleChange={this.handleChange} itemsLength={albums.length}/>
         {renderPageNumbers}
        </div>
+       { albums.length >= 1 
+       ?
        <div className="grid__container">
-        {renderAlbums}
+        { renderAlbums } 
        </div>
+       : <div className="loader"></div>}
       </section>  
     );
   }
@@ -124,7 +132,8 @@ const mapDispatchToProps = (dispatch) => ({
 
  const mapStateToProps = (state) => ({
   albums: state.albums.albums,
-  users: state.users.users
+  users: state.users.users,
+  loading: state.albums.loading,
 });
 
 

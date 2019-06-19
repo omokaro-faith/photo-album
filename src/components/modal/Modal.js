@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../styles//components/modal/_modal.css';
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   return (
     <div className={showHideClassName} onMouseDown={handleClose}>
       <section className='modal-main'>
-        <div className=''>{children}</div>
-      <button onClick={handleClose}>close</button>
+        <div className='modal__children'>{children}</div>
+      <button onClick={handleClose} className='modal__button'>close</button>
       </section>
     </div>
   );
