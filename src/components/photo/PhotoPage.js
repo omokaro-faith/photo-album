@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropdown from '../pagination/Dropdown';
 import Buttons from '../pagination/Button';
 import Modal from '../modal/Modal';
 import { getPhotos }  from '../../actions/photo';
+import Header from '../header/Header';
 import { getPageNumbers, getCurrentItems } from '../../utils/utils';
 
 export class PhotoPage extends Component {
@@ -75,9 +76,9 @@ export class PhotoPage extends Component {
     (
       <div key={index} className="grid__item" onClick={() => this.showModal({ content: photo })}>
         <div className="grid__img">
-            <img src={`${photo.thumbnailUrl}`} alt='' title='' />
+            <img src={`${photo.thumbnailUrl}`} alt='' title='' className='grid__img--item'/>
         </div>
-        <h4>Title: {photo.title}</h4>
+        <h5>Title: {photo.title}</h5>
       </div>
     ));
 
@@ -93,22 +94,27 @@ export class PhotoPage extends Component {
 
     return (
       <section className="grid">
-        <div>
-         <Dropdown handleChange={this.handleChange}/>
+        <Header totalItems={photos.length} pageName='Photos'/>
+        <div className='dropdown-button__wrapper'>
+         <Dropdown handleChange={this.handleChange} itemsLength={photos.length}/>
          {renderPageNumbers}
         </div>
-          <h1>Owner: {albumOwner}</h1>
-          <h1>Album Title: {albumTitle}</h1>
-          <div className="grid__container">
-          { renderPhotos }
-        </div>
+        { photos.length >= 1 ? 
+          <Fragment>
+            <h3>Owner: {albumOwner}</h3>
+            <h3>Album Title: {albumTitle}</h3>
+            <div className="grid__container">
+            { renderPhotos }
+            </div>
+          </Fragment>
+        : <div className="loader"></div> }
         <Modal show={show} handleClose={this.hideModal}>
             <div className='img-content'>
               <img src={`${modalContent.picture}`} alt='' title=''/>
             </div>
             <div>
-              <h1>Owner: {albumOwner}</h1>
-              <h1>Title: {modalContent.title}</h1>
+              <h5>Owner: <span>{albumOwner}</span></h5>
+              <h5>Title: {modalContent.title}</h5>
             </div>
         </Modal>
       </section> 
