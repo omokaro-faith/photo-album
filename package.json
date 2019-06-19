@@ -53,7 +53,10 @@
       "!src/index.js",
       "!src/serviceWorker.js",
       "!src/routes/AppRoutes.js",
-      "!src/store/configureStore.js"
+      "!src/store/configureStore.js",
+      "!src/tests/fixtures/albums.js",
+      "!src/tests/fixtures/photos.js",
+      "!src/tests/fixtures/users.js"
     ]
   }
 }
