@@ -74,5 +74,10 @@ describe('PhotoPage', () => {
 
       expect(wrapper.state()).toEqual(result);
     });
+
+    it('displays the loader', () => {
+      const loader = wrapper.find('.loader');
+      expect(loader.length).toEqual(1);
+    })
   });
 })

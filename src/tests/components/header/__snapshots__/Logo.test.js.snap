@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo renders should not have any regressions 1`] = `ShallowWrapper {}`;

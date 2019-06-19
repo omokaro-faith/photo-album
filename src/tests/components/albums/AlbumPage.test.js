@@ -13,6 +13,7 @@ describe('AlbumPage', () => {
       users: [],
       getUsers: jest.fn(),
       getAlbums: jest.fn(),
+      albums: [],
     };
     wrapper = shallow(<AlbumPage {...props}/>);
   });
@@ -28,6 +29,7 @@ describe('AlbumPage', () => {
     it('should not have any regressions', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
     describe('getDerivedStateFromProps', () => {
       it('should set album data', () => {
         const props = { albums, users };
@@ -83,5 +85,12 @@ describe('AlbumPage', () => {
         expect(result).toEqual(expected);
       });
     });
+
+    describe('Albums length is equal 0', () => {
+      it('displays the loader', () => {
+        const loader = wrapper.find('.loader');
+        expect(loader.length).toEqual(1);
+      })
+    })
   });
 })
