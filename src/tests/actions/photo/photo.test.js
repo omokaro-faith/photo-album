@@ -35,7 +35,12 @@ describe('Async getPhotos', () => {
 
     await store.dispatch(getPhotos())
       .then(() => {
+        expect(store.getActions()[0].type).toEqual('GET_PHOTOS');
         expect(store.getActions()).toMatchSnapshot();
       })
+      .catch(() => {
+        expect(store.getActions()[0].type).toEqual('PHOTO_ERROR');
+        expect(store.getActions()[0].message).toEqual('Cannot fetch photo');
+      });
   });
 })

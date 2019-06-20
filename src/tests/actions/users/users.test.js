@@ -35,7 +35,12 @@ describe('Async getUsers', () => {
 
     await store.dispatch(getUsers())
       .then(() => {
+        expect(store.getActions()[0].type).toEqual('GET_USERS');
         expect(store.getActions()).toMatchSnapshot();
       })
+      .catch(() => {
+        expect(store.getActions()[0].type).toEqual('USER_ERROR');
+        expect(store.getActions()[0].message).toEqual('Cannot fetch Cannot fetch users');
+      });
   });
 })

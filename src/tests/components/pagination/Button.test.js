@@ -10,7 +10,8 @@ describe('Button', () => {
     props = {
       handleClick: jest.fn(),
       id: 1,
-      pageNumber: 2
+      pageNumber: 2,
+      currentPage: 2
     };
     wrapper = shallow(<Button {...props}/>);
   });

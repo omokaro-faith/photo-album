@@ -35,7 +35,12 @@ describe('Async getAlbums', () => {
 
     await store.dispatch(getAlbums())
       .then(() => {
+        expect(store.getActions()[0].type).toEqual('GET_ALBUMS');
         expect(store.getActions()).toMatchSnapshot();
       })
+      .catch(() => {
+        expect(store.getActions()[0].type).toEqual('ALBUMS_ERROR');
+        expect(store.getActions()[0].message).toEqual('Cannot fetch albums');
+      });
   });
 })
