@@ -1,3 +1,6 @@
+***
+#### Coverage and Build badges gotten from TravisCI and Coveralls for Alabin
+
 [![Coverage Status](https://coveralls.io/repos/github/omokaro-faith/photo-album/badge.svg?branch=develop)](https://coveralls.io/github/omokaro-faith/photo-album?branch=develop)
 [![Coverage Status](https://travis-ci.org/omokaro-faith/photo-album.svg?branch=develop)](https://travis-ci.org/omokaro-faith/photo-album.svg?branch=develop)
 
@@ -27,10 +30,9 @@ Application was developed using:
 - Using HTTP; $ git clone [https://github.com/omokaro-faith/photo-album](https://github.com/omokaro-faith/photo-album)
 - Navigate to the root directory e.g $ cd photo-album
 - Run `npm install`. This installs all the app's dependencies.
-- To start the app run `npm run build`.
+- To build/start the app run `npm run build`.
 - View app in port 3000.
 - Run `npm run test` to run test.
-- To view coverage gotten from coveralls run `npm run coveralls`.
 
 #### Running Project with DOCKER
 - Make sure you have docker installed
@@ -38,7 +40,3 @@ Application was developed using:
 - Run `docker build -t photo-album-app .`
 - Run `docker run -it -p 8080:80 photo-album-app`
 - View app in port 8080
-
-
-
- 
