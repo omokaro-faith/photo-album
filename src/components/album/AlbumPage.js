@@ -81,19 +81,19 @@ export class AlbumPage extends Component {
     const renderAlbums = getCurrentItems(currentPage, ITEMS_PER_PAGE, albums).map((album, index) => 
     (
       <div key={index} className="grid__item">
-      <Link to={{
+          <Link to={{
           pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
           state: { AlbumPage: true },
-        }}
-        >
-        <div className="grid__img">
-          <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
-        </div>
-        </Link>
-        <h5>Username: {album.userName} </h5>
-        <div className='tooltip'>
-        <h5>Title: {album.title}</h5>
-          <h4 className='tooltiptext'>{album.title} </h4>
+          }}
+          >
+          <div className="grid__img">
+            <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
+          </div>
+          </Link>
+          <div className='tooltip'>
+            <h5>Username: {album.userName} </h5>
+            <h5>Title: {album.title}</h5>
+            <h4 className='tooltiptext'>{album.title} </h4>
         </div>
       </div>
     ));
