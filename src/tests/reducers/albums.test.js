@@ -20,4 +20,18 @@ describe('albumReducer', () => {
       albums: action.albums
     });
   });
+
+  test('should throw error message when albums cannot be fetched', () => {
+    const albumReducerState = {};
+    const action = {
+      type: 'ALBUMS_ERROR',
+      message: 'Cannot fetch albums'
+    }
+
+    const state = albumReducer(albumReducerState, action);
+    expect(state).toEqual({
+      ...albumReducerState,
+      message: 'Cannot fetch albums'
+    });
+  });
 });

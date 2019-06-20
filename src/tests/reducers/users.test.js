@@ -1,7 +1,7 @@
 import userReducer from '../../reducers/users';
 import users from '../fixtures/users';
 
-describe('userReducer', () => {
+describe('usersReducer', () => {
   test('should set up default values', () => {
     const state = userReducer(undefined, {type: '@@INIT'});
     expect(state).toEqual({});
@@ -18,6 +18,21 @@ describe('userReducer', () => {
     expect(state).toEqual({
       ...userReducerState,
       users: action.users
+    });
+  });
+
+
+  test('should throw error message when users cannot be fetched', () => {
+    const userReducerState = {};
+    const action = {
+      type: 'USER_ERROR',
+      message: 'Cannot fetch users'
+    }
+
+    const state = userReducer(userReducerState, action);
+    expect(state).toEqual({
+      ...userReducerState,
+      message: 'Cannot fetch users'
     });
   });
 });
