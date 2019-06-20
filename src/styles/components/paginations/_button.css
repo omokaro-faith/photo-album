@@ -5,6 +5,17 @@
 }
 
 .buttonwrapper__item--pagination  ol {
+  border: 2px solid #47A;
+  background-color: #47A;
+  padding: 2px 12px;
+  text-decoration: none;
+  font-family: sans-serif;
+  color: #fff;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
+.buttonwrapper__item--pagination-active  ol {
   padding: 2px 12px;
   text-decoration: none;
   font-family: sans-serif;
@@ -12,8 +23,4 @@
   border-radius: 1rem;
   border: 2px solid #47A;
   margin-right: 1rem;
-}
-
-.buttonwrapper__item--pagination ol:hover:not(.active) {
-  color: #47A;
 }

@@ -104,6 +104,7 @@ export class AlbumPage extends Component {
         id={number}
         handleClick={this.handleClick}
         pageNumber={number}
+        currentPage={currentPage}
        />
     ))
 
