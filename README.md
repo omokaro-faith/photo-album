@@ -7,9 +7,9 @@
 # Alabin
 Alabin is an Application that displays albums of users using data gotten from:
 
-[https://jsonplaceholder.typicode.com/albums?_start=0&_limit=5](https://jsonplaceholder.typicode.com/albums)
+[https://jsonplaceholder.typicode.com/albums](https://jsonplaceholder.typicode.com/albums)
 
-[https://jsonplaceholder.typicode.com/photos?albumId=5&_start=0&_limit=10](https://jsonplaceholder.typicode.com/photos)
+[https://jsonplaceholder.typicode.com/photos](https://jsonplaceholder.typicode.com/photos)
 
 [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
 
