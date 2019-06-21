@@ -126,7 +126,7 @@ export class AlbumPage extends Component {
       <Fragment>
       { 
       (errorMessage || message) &&
-        <ErrorDisplay />
+        <ErrorDisplay item='albums'/>
       }
       <section className='grid'>
       <Header totalItems={totalAlbums} pageName='Albums' />

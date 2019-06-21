@@ -132,7 +132,7 @@ export class PhotoPage extends Component {
 		<Fragment>
       { 
       (errorMessage || message) &&
-        <ErrorDisplay />
+        <ErrorDisplay item='photos'/>
       }
 			<section className='grid'>
 			<Header totalItems={totalPhotos} pageName='Photos'/>
