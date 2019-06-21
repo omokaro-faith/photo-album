@@ -29,7 +29,7 @@ export const fetchAllPhotos = albumId => async (dispatch) => {
   }
 }
 
-export const getPhotos = (albumId, start= 1 , limit) => async (dispatch) => {
+export const getPhotos = (albumId, start= 0 , limit) => async (dispatch) => {
   try {
     const photos = await axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}&_start=${start}&_limit=${limit}`);
     return dispatch(setPhotos(photos.data));
