@@ -5,6 +5,6 @@
 .logo__wrapper-item {
     text-decoration: none;
     font-size: 5rem;
-    color: #47A;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    color: var(--default-blue-color);
+    font-family: var(--logo-font);
 }

@@ -7,7 +7,7 @@ export const setUsers = users => ({
 });
 
 export const setUsersError = () => ({
-  type: 'USER_ERROR',
+  type: 'GET_USERS_ERROR',
   message: 'Cannot fetch users'
 });
 

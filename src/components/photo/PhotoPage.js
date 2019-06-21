@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import Dropdown from '../pagination/Dropdown';
 import Buttons from '../pagination/Button';
 import Modal from '../modal/Modal';
-import { getPhotos } from '../../actions/photo';
+import { getPhotos, fetchAllPhotos } from '../../actions/photo';
+import { getPageNumbers, getStartPage } from '../../utils/utils';
+import { INITIAL_START_VALUE } from '../../constants/constants';
 import Header from '../header/Header';
-import { getPageNumbers, getCurrentItems } from '../../utils/utils';
+
 
 export class PhotoPage extends Component {
 	constructor(props) {
@@ -15,7 +17,7 @@ export class PhotoPage extends Component {
 			show: false,
 			modalContent: {},
 			currentPage: 1,
-			itemsPerPage: 10,
+			itemsPerpage: 20,
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.showModal = this.showModal.bind(this);
@@ -24,7 +26,9 @@ export class PhotoPage extends Component {
 
 	static propTypes = {
 		getPhotos: PropTypes.func.isRequired,
+		fetchAllPhotos: PropTypes.func.isRequired,
 		photos: PropTypes.array.isRequired,
+		totalPhotos: PropTypes.number.isRequired,
 		match: PropTypes.shape({
 			params: PropTypes.shape({
 				albumOwner: PropTypes.string.isRequired,
@@ -33,12 +37,22 @@ export class PhotoPage extends Component {
 		}).isRequired,
 	};
 
+	static defaultProps = {
+		totalPhotos: 0,
+		photos: [],
+  };
+
 	componentDidMount() {
-		const {
-			match: { params },
-			getPhotos,
+	const {
+		match: { params },
+		getPhotos,
+		fetchAllPhotos,
 		} = this.props;
-		getPhotos(undefined, params.albumId);
+
+	const { itemsPerpage } = this.state;
+
+	fetchAllPhotos(params.albumId);
+	getPhotos(params.albumId, INITIAL_START_VALUE, itemsPerpage);
 	}
 
 	handleChange(event) {
@@ -46,16 +60,23 @@ export class PhotoPage extends Component {
 			match: { params },
 			getPhotos,
 		} = this.props;
-		getPhotos(event.target.value, params.albumId);
+
 		this.setState({
 			currentPage: 1,
+			itemsPerpage: event.target.value,
 		});
+
+		getPhotos(params.albumId, INITIAL_START_VALUE, event.target.value);
 	}
 
 	handleClick(event) {
-		this.setState({
-			currentPage: Number(event.target.id),
-		});
+		const { itemsPerpage } = this.state;
+		const { getPhotos, match: { params } } = this.props;
+    const currentPage = Number(event.target.id);
+		const start = getStartPage(itemsPerpage, currentPage);
+		
+		getPhotos(params.albumId, start, itemsPerpage);
+		this.setState({ currentPage });
 	}
 
 	showModal = ({ content }) => {
@@ -82,11 +103,12 @@ export class PhotoPage extends Component {
 				params: { albumOwner, albumTitle },
 			},
 		} = this.props;
-		const { show, modalContent, currentPage, itemsPerPage } = this.state;
-		const renderPhotos = getCurrentItems(currentPage, itemsPerPage, photos).map((photo, index) => (
+		const { show, modalContent, currentPage, itemsPerpage } = this.state;
+		const { totalPhotos } = this.props;
+		const renderPhotos = photos.map((photo, index) => (
 			<div key={index} className="grid__item" onClick={() => this.showModal({ content: photo })}>
 					<div className="grid__img">
-						<img src={`${photo.thumbnailUrl}`} alt="" title="" className="grid__img--item" />
+						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className="grid__img--item" />
 					</div>
         <div className="tooltip">
 					<h5>Title: {photo.title}</h5>
@@ -95,7 +117,7 @@ export class PhotoPage extends Component {
 			</div>
 		));
 
-		const renderPageNumbers = getPageNumbers(photos, itemsPerPage).map(number => (
+		const renderPageNumbers = getPageNumbers(totalPhotos, itemsPerpage).map(number => (
 			<Buttons
 				key={number}
 				id={number}
@@ -107,7 +129,7 @@ export class PhotoPage extends Component {
 
 		return (
 			<section className="grid">
-				<Header totalItems={photos.length} pageName="Photos" />
+			<Header totalItems={totalPhotos} pageName='Photos'/>
 				<div className="dropdown-button__wrapper">
 					<Dropdown handleChange={this.handleChange} itemsLength={photos.length} />
 					{renderPageNumbers}
@@ -123,7 +145,7 @@ export class PhotoPage extends Component {
 				)}
 				<Modal show={show} handleClose={this.hideModal}>
 					<div className="img-content">
-						<img src={`${modalContent.picture}`} alt="" title="" />
+						<img src={`${modalContent.picture}`} alt='' title='' />
 					</div>
 					<div>
 						<h5>
@@ -137,16 +159,14 @@ export class PhotoPage extends Component {
 	}
 }
 
-PhotoPage.defaultProps = {
-	photos: [],
-};
-
 const mapDispatchToProps = dispatch => ({
-	getPhotos: (limit, albumId) => dispatch(getPhotos(limit, albumId)),
+	getPhotos: (albumId, start, limit) => dispatch(getPhotos(albumId, start, limit, )),
+	fetchAllPhotos: (albumId) => dispatch(fetchAllPhotos(albumId))
 });
 
 const mapStateToProps = state => ({
 	photos: state.photos.photos,
+	totalPhotos: state.photos.totalPhotos,
 });
 
 export default connect(

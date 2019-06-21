@@ -42,4 +42,11 @@ export const DEFAULT_COLOR_PALLETTE =
       },
  ];
 
-export const ITEMS_PER_PAGE = 10;
+export const INITIAL_START_VALUE = 0;
+
+export const ERROR_OCCURED = {
+  error: 'An error occured',
+  status: 'error',
+  buttons:{
+    buttons: { cancel: 'Close'}}
+}

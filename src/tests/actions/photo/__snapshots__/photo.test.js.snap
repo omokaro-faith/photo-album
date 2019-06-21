@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Async fetchAllPhotos fetch all photos 1`] = `
+Array [
+  Object {
+    "totalPhotos": 50,
+    "type": "GET_ALL_PHOTOS",
+  },
+]
+`;
+
 exports[`Async getPhotos gets photos 1`] = `
 Array [
   Object {

@@ -21,10 +21,24 @@ describe('photosReducer', () => {
     });
   });
 
+  test('should set all photos', () => {
+    const photoReducerState = {};
+    const action = {
+      type: 'GET_ALL_PHOTOS',
+      totalPhotos: photos.length
+    }
+
+    const state = photoReducer(photoReducerState, action);
+    expect(state).toEqual({
+      ...photoReducerState,
+      totalPhotos: photos.length
+    });
+  });
+
   test('should throw error message when photos cannot be fetched', () => {
     const photoReducerState = {};
     const action = {
-      type: 'PHOTO_ERROR',
+      type: 'GET_PHOTOS_ERROR',
       message: 'Cannot fetch photo'
     }
 
@@ -32,6 +46,20 @@ describe('photosReducer', () => {
     expect(state).toEqual({
       ...photoReducerState,
       message: 'Cannot fetch photo'
+    });
+  });
+
+  test('should throw error message when all photos cannot be fetched', () => {
+    const photoReducerState = {};
+    const action = {
+      type: 'GET_ALL_PHOTOS_ERROR',
+      errorMessage: 'Cannot fetch all photos'
+    }
+
+    const state = photoReducer(photoReducerState, action);
+    expect(state).toEqual({
+      ...photoReducerState,
+      errorMessage: 'Cannot fetch all photos'
     });
   });
 });

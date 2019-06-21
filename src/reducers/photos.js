@@ -5,9 +5,15 @@ const initialState = {}
    case 'GET_PHOTOS':
    const { photos } = action;
      return {...state, photos};
-   case 'PHOTO_ERROR':
+    case 'GET_ALL_PHOTOS':
+      const { totalPhotos } = action;
+    return {...state, totalPhotos};
+   case 'GET_PHOTOS_ERROR':
    const { message } = action; 
-     return { ...state, message}
+     return { ...state, message };
+   case 'GET_ALL_PHOTOS_ERROR':
+      const { errorMessage } = action; 
+      return { ...state, errorMessage}
    default:
      return state;
  }

@@ -13,6 +13,7 @@ describe('AlbumPage', () => {
       users: [],
       getUsers: jest.fn(),
       getAlbums: jest.fn(),
+      fetchAllAlbums: jest.fn(),
       albums: [],
     };
     wrapper = shallow(<AlbumPage {...props}/>);
@@ -90,7 +91,7 @@ describe('AlbumPage', () => {
       it('displays the loader', () => {
         const loader = wrapper.find('.loader');
         expect(loader.length).toEqual(1);
-      })
-    })
+      });
+    });
   });
 })

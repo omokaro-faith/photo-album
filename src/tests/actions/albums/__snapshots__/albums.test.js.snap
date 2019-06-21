@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Async fetchAllAlbums fetch all albums 1`] = `
+Array [
+  Object {
+    "totalAlbums": 100,
+    "type": "GET_ALL_ALBUMS",
+  },
+]
+`;
+
+exports[`Async fetchAllAlbums throws error when album cannot be fetched 1`] = `
+Array [
+  Object {
+    "errorMessage": "Cannot fetch all albums",
+    "type": "GET_ALL_ALBUMS_ERROR",
+  },
+]
+`;
+
 exports[`Async getAlbums gets albums 1`] = `
 Array [
   Object {
@@ -28,81 +46,6 @@ Array [
         "id": 5,
         "title": "eaque aut omnis a",
         "userId": 1,
-      },
-      Object {
-        "id": 6,
-        "title": "natus impedit quibusdam illo est",
-        "userId": 1,
-      },
-      Object {
-        "id": 7,
-        "title": "quibusdam autem aliquid et et quia",
-        "userId": 1,
-      },
-      Object {
-        "id": 8,
-        "title": "qui fuga est a eum",
-        "userId": 1,
-      },
-      Object {
-        "id": 9,
-        "title": "saepe unde necessitatibus rem",
-        "userId": 1,
-      },
-      Object {
-        "id": 10,
-        "title": "distinctio laborum qui",
-        "userId": 1,
-      },
-      Object {
-        "id": 11,
-        "title": "quam nostrum impedit mollitia quod et dolor",
-        "userId": 2,
-      },
-      Object {
-        "id": 12,
-        "title": "consequatur autem doloribus natus consectetur",
-        "userId": 2,
-      },
-      Object {
-        "id": 13,
-        "title": "ab rerum non rerum consequatur ut ea unde",
-        "userId": 2,
-      },
-      Object {
-        "id": 14,
-        "title": "ducimus molestias eos animi atque nihil",
-        "userId": 2,
-      },
-      Object {
-        "id": 15,
-        "title": "ut pariatur rerum ipsum natus repellendus praesentium",
-        "userId": 2,
-      },
-      Object {
-        "id": 16,
-        "title": "voluptatem aut maxime inventore autem magnam atque repellat",
-        "userId": 2,
-      },
-      Object {
-        "id": 17,
-        "title": "aut minima voluptatem ut velit",
-        "userId": 2,
-      },
-      Object {
-        "id": 18,
-        "title": "nesciunt quia et doloremque",
-        "userId": 2,
-      },
-      Object {
-        "id": 19,
-        "title": "velit pariatur quaerat similique libero omnis quia",
-        "userId": 2,
-      },
-      Object {
-        "id": 20,
-        "title": "voluptas rerum iure ut enim",
-        "userId": 2,
       },
     ],
     "type": "GET_ALBUMS",

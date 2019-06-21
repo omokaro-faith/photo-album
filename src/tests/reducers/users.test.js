@@ -25,7 +25,7 @@ describe('usersReducer', () => {
   test('should throw error message when users cannot be fetched', () => {
     const userReducerState = {};
     const action = {
-      type: 'USER_ERROR',
+      type: 'GET_USERS_ERROR',
       message: 'Cannot fetch users'
     }
 

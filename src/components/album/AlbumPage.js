@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Dropdown from '../pagination/Dropdown';
 import Buttons from '../pagination/Button';
-import { getAlbums }  from '../../actions/albums';
+import { getAlbums, fetchAllAlbums }  from '../../actions/albums';
 import { getUsers }  from '../../actions/users';
-import { DEFAULT_COLOR_PALLETTE, ITEMS_PER_PAGE } from '../../constants/constants';
-import { getPageNumbers, getCurrentItems } from '../../utils/utils';
+import { DEFAULT_COLOR_PALLETTE, INITIAL_START_VALUE } from '../../constants/constants';
+import { getPageNumbers, getStartPage } from '../../utils/utils';
 import Header from '../header/Header';
 
 export class AlbumPage extends Component {
@@ -16,6 +16,7 @@ export class AlbumPage extends Component {
     this.state = {
       albums: [],
       currentPage: 1,
+      itemsPerpage: 20,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -26,16 +27,20 @@ export class AlbumPage extends Component {
     getUsers:  PropTypes.func.isRequired,
     users: PropTypes.array.isRequired,
     albums: PropTypes.array.isRequired,
+    fetchAllAlbums:  PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     albums: [],
     users: [],
+    totalAlbums: 0,
   };
 
   componentDidMount() {
-    const { getAlbums, getUsers } = this.props;
-    getAlbums();
+    const { getAlbums, getUsers, fetchAllAlbums } = this.props;
+    fetchAllAlbums();
+    const { itemsPerpage } = this.state;
+    getAlbums(INITIAL_START_VALUE, itemsPerpage);
     getUsers();
   }
 
@@ -64,21 +69,29 @@ export class AlbumPage extends Component {
 
   handleChange(event) {
     const { getAlbums } = this.props;
-    getAlbums(event.target.value);
     this.setState({
       currentPage: 1,
+      itemsPerpage: event.target.value,
     });
+
+    getAlbums(INITIAL_START_VALUE, event.target.value);
   }
 
   handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
+    const { itemsPerpage } = this.state;
+    const { getAlbums } = this.props;
+    const currentPage = Number(event.target.id);
+    const start = getStartPage(itemsPerpage, currentPage);
+    
+    getAlbums(start, itemsPerpage);
+    this.setState({ currentPage });
   }
 
   render() {
-    const { albums, currentPage } = this.state;
-    const renderAlbums = getCurrentItems(currentPage, ITEMS_PER_PAGE, albums).map((album, index) => 
+    const { albums, currentPage, itemsPerpage } = this.state;
+    const { totalAlbums } = this.props;
+
+    const renderAlbums = albums.map((album, index) => 
     (
       <div key={index} className="grid__item">
           <Link to={{
@@ -87,7 +100,7 @@ export class AlbumPage extends Component {
           }}
           >
           <div className="grid__img">
-            <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt='' title={`${album.title}`} />
+            <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt={`${album.title}`} />
           </div>
           </Link>
           <div className='tooltip'>
@@ -98,7 +111,7 @@ export class AlbumPage extends Component {
       </div>
     ));
 
-    const renderPageNumbers = getPageNumbers(albums, ITEMS_PER_PAGE).map((number) => (
+    const renderPageNumbers = getPageNumbers(totalAlbums, itemsPerpage).map((number) => (
        <Buttons 
         key={number}
         id={number}
@@ -106,11 +119,11 @@ export class AlbumPage extends Component {
         pageNumber={number}
         currentPage={currentPage}
        />
-    ))
+    ));
 
     return (
       <section className="grid">
-        <Header totalItems={albums.length} pageName='Albums'/>
+      <Header totalItems={totalAlbums} pageName='Albums'/>
         <div className='dropdown-button__wrapper'>
          <Dropdown handleChange={this.handleChange} itemsLength={albums.length}/>
         {renderPageNumbers}
@@ -127,14 +140,15 @@ export class AlbumPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getAlbums: (limit) => dispatch(getAlbums(limit)),
-  getUsers: () => dispatch(getUsers())
+  getAlbums: (start, limit) => dispatch(getAlbums(start, limit)),
+  getUsers: () => dispatch(getUsers()),
+  fetchAllAlbums: () => dispatch(fetchAllAlbums()),
 });
 
  const mapStateToProps = (state) => ({
   albums: state.albums.albums,
+  totalAlbums: state.albums.totalAlbums,
   users: state.users.users,
-  loading: state.albums.loading,
 });
 
 

@@ -1,5 +1,9 @@
 html {
     font-size: 62.5%;
+    --default-grey-color: rgb(112, 110, 129);
+    --default-blue-color: #47A;
+    --default-white-color: #fff;
+    --logo-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -46,22 +50,22 @@ img {
 }
 
 h3 {
-    color: rgb(112, 110, 129);
+    color: var(--default-grey-color);
     margin-top: 1rem;
 }
 
 p {
-    color: #47A;
+    color: var(--default-blue-color);
     text-transform: capitalize;
 }
 
 h5 {
-    color: rgb(112, 110, 129);
+    color: var(--default-grey-color);
 }
 
 a {
     text-decoration: none;
-    color: #47A;
+    color: var(--default-blue-color);
 }
 
 .grid__container {
@@ -73,11 +77,11 @@ a {
 }
 
 .grid__img--item {
-    border: 1rem rgb(112, 110, 129) dashed;
+    border: 1rem var(--default-grey-color) dashed;
 }
 
 .grid__img--item:hover {
-    border: 1rem #47A dashed;
+    border: 1rem var(--default-blue-color) dashed;
 }
 
 .grid__item {
@@ -123,9 +127,6 @@ a {
     h3 {
         text-align: center;
     }
-    .modal-main {
-        width: 700px;
-    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -161,15 +162,12 @@ a {
     h3 {
         text-align: center;
     }
-    .modal-main {
-        width: 700px;
-    }
 }
 
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid var(--default-blue-color);
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite;
@@ -198,7 +196,7 @@ a {
 .tooltip {
     position: relative;
     display: inline-block;
-    color: #47A;
+    color: var(--default-blue-color);
     text-transform: capitalize;
 }
 

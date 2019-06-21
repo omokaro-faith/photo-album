@@ -1,12 +1,12 @@
 import configureMockStore from 'redux-mock-store'
 import nock from 'nock';
 import thunk from 'redux-thunk';
-import { setUsers, getUsers } from '../../../actions/users';
+import { setUsers, getUsers, setUsersError } from '../../../actions/users';
 import users from '../../fixtures/users';
 
 const createMockStore = configureMockStore([thunk]);
 
-describe('setAlbums', () => {
+describe('setUsers', () => {
   it('should set users', () => {
     const action = setUsers(users);
 
@@ -14,6 +14,18 @@ describe('setAlbums', () => {
     type: 'GET_USERS',
     users,
     });
+  });
+});
+
+describe('setUsersError', () => {
+  it('should set users error if an error occurs while setting users', () => {
+    const action = setUsersError(users);
+    const expected = {
+      type: 'GET_USERS_ERROR',
+      message: 'Cannot fetch users'
+    }
+
+  expect(action).toEqual(expected);
   });
 });
 
@@ -27,9 +39,9 @@ describe('Async getUsers', () => {
     nock.cleanAll();
   });
 
-  it('gets users',async () => {
+  it('gets users', async () => {
     nock('https://localhost:8000')
-      .get('https://jsonplaceholder.typicode.com/users')
+      .get('jsonplaceholder.typicode.com/users')
       .reply(200);
 
 
@@ -39,8 +51,8 @@ describe('Async getUsers', () => {
         expect(store.getActions()).toMatchSnapshot();
       })
       .catch(() => {
-        expect(store.getActions()[0].type).toEqual('USER_ERROR');
-        expect(store.getActions()[0].message).toEqual('Cannot fetch Cannot fetch users');
+        expect(store.getActions()[0].type).toEqual('GET_USERS_ERROR');
+        expect(store.getActions()[0].message).toEqual('Cannot fetch users');
       });
   });
 })

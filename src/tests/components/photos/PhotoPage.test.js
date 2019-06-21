@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PhotoPage } from '../../../components/photo/PhotoPage';
+import Dropdown from '../../../components/pagination/Dropdown';
+import Button from '../../../components/pagination/Button';
 import photos from '../../fixtures/photos';
 
 describe('PhotoPage', () => {
@@ -11,6 +13,8 @@ describe('PhotoPage', () => {
     props = {
       photos: [],
       getPhotos: jest.fn(),
+      fetchAllPhotos: jest.fn(),
+      totalPhotos: 10,
       match: {
         params: {
           albumOwner: 'Leonardo Da vinci',
@@ -69,7 +73,7 @@ describe('PhotoPage', () => {
         ],
         show: false,
         currentPage: 1,
-        itemsPerPage: 10,
+        itemsPerpage: 20,
       };
 
       expect(wrapper.state()).toEqual(result);
@@ -78,6 +82,16 @@ describe('PhotoPage', () => {
     it('displays the loader', () => {
       const loader = wrapper.find('.loader');
       expect(loader.length).toEqual(1);
-    })
+    });
+
+    it('displays the dropdown component', () => {
+      const select = wrapper.find(Dropdown);
+      expect(select.length).toEqual(1);
+    });
+
+    it('displays the button component', () => {
+      const button = wrapper.find(Button);
+      expect(button.length).toEqual(1);
+    });
   });
 })
