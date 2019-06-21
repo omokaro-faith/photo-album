@@ -107,13 +107,13 @@ export class PhotoPage extends Component {
 		const { show, modalContent, currentPage, itemsPerpage } = this.state;
 		const { totalPhotos, errorMessage, message } = this.props;
 		const renderPhotos = photos.map((photo, index) => (
-			<div key={index} className="grid__item" onClick={() => this.showModal({ content: photo })}>
-					<div className="grid__img">
-						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className="grid__img--item" />
+			<div key={index} className='grid__item' onClick={() => this.showModal({ content: photo })}>
+					<div className='grid__img'>
+						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className='grid__img--item' />
 					</div>
-        <div className="tooltip">
+        <div className='tooltip'>
 					<h5>Title: {photo.title}</h5>
-					<h4 className="tooltiptext">{photo.title} </h4>
+					<h4 className='tooltiptext'>{photo.title} </h4>
 				</div>
 			</div>
 		));
@@ -134,9 +134,9 @@ export class PhotoPage extends Component {
       (errorMessage || message) &&
         <ErrorDisplay />
       }
-			<section className="grid">
+			<section className='grid'>
 			<Header totalItems={totalPhotos} pageName='Photos'/>
-				<div className="dropdown-button__wrapper">
+				<div className='dropdown-button__wrapper'>
 					<Dropdown handleChange={this.handleChange} itemsLength={photos.length} />
 					{renderPageNumbers}
 				</div>
@@ -144,14 +144,14 @@ export class PhotoPage extends Component {
 					<Fragment>
 						<h3>Owner: {albumOwner}</h3>
 						<h3>Album Title: {albumTitle}</h3>
-						<div className="grid__container">{renderPhotos}</div>
+						<div className='grid__container'>{renderPhotos}</div>
 					</Fragment>
 				) : (
-					<div className="loader" />
+					<div className='loader' />
 				)}
 				<Modal show={show} handleClose={this.hideModal}>
-					<div className="img-content">
-						<img src={`${modalContent.picture}`} alt='' title='' />
+					<div className='img-content'>
+						<img src={`${modalContent.picture}`} alt='defualt-title'/>
 					</div>
 					<div>
 						<h5>

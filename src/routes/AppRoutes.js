@@ -12,7 +12,7 @@ const NotFoundPage = lazy(() => import('../components/notfound/NotFoundPage'));
  const AppRoute = () => (
   <BrowserRouter>
   <div className='wrapper__item'>
-      <Suspense fallback={<div className="loader"></div>}>
+      <Suspense fallback={<div className='loader'></div>}>
       <Route component={Logo} exact/>
         <Switch>
           <Route path='/' component={AlbumPage} exact/>

@@ -94,13 +94,13 @@ export class AlbumPage extends Component {
 
     const renderAlbums = albums.map((album, index) => 
     (
-      <div key={index} className="grid__item">
+      <div key={index} className='grid__item'>
           <Link to={{
           pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
           state: { AlbumPage: true },
           }}
           >
-          <div className="grid__img">
+          <div className='grid__img'>
             <img className='grid__img--item' src={`https://via.placeholder.com/150/${album.color}`} alt={`${album.title}`} />
           </div>
           </Link>
@@ -128,7 +128,7 @@ export class AlbumPage extends Component {
       (errorMessage || message) &&
         <ErrorDisplay />
       }
-      <section className="grid">
+      <section className='grid'>
       <Header totalItems={totalAlbums} pageName='Albums' />
         <div className='dropdown-button__wrapper'>
          <Dropdown handleChange={this.handleChange} itemsLength={albums.length}/>
@@ -136,10 +136,10 @@ export class AlbumPage extends Component {
        </div>
        { albums.length >= 1 
        ?
-       <div className="grid__container">
+       <div className='grid__container'>
         { renderAlbums } 
        </div>
-       : <div className="loader"></div>}
+       : <div className='loader'></div>}
       </section> 
     </Fragment> 
     );
