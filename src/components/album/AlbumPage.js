@@ -92,9 +92,9 @@ export class AlbumPage extends Component {
     const { albums, currentPage, itemsPerpage } = this.state;
     const { totalAlbums, errorMessage, message } = this.props;
 
-    const renderAlbums = albums.map((album, index) => 
+    const renderAlbums = albums.map(album => 
     (
-      <div key={index} className='grid__item'>
+      <div key={album.albumId} className='grid__item'>
           <Link to={{
           pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
           state: { AlbumPage: true },

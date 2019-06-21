@@ -106,8 +106,8 @@ export class PhotoPage extends Component {
 		} = this.props;
 		const { show, modalContent, currentPage, itemsPerpage } = this.state;
 		const { totalPhotos, errorMessage, message } = this.props;
-		const renderPhotos = photos.map((photo, index) => (
-			<div key={index} className='grid__item' onClick={() => this.showModal({ content: photo })}>
+		const renderPhotos = photos.map(photo => (
+			<div key={photo.id} className='grid__item' onClick={() => this.showModal({ content: photo })}>
 					<div className='grid__img'>
 						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className='grid__img--item' />
 					</div>
@@ -158,6 +158,7 @@ export class PhotoPage extends Component {
 							Owner: <span>{albumOwner}</span>
 						</h5>
 						<h5>Title: {modalContent.title}</h5>
+						<h5>Album Title: {albumTitle}</h5>
 					</div>
 				</Modal>
 			</section>

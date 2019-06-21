@@ -1,8 +1,8 @@
 
 #### Test Coverage and Build badges gotten from TravisCI and Coveralls for Alabin
 
-[![Coverage Status](https://coveralls.io/repos/github/omokaro-faith/photo-album/badge.svg?branch=develop)](https://coveralls.io/github/omokaro-faith/photo-album?branch=develop)
 [![Coverage Status](https://travis-ci.org/omokaro-faith/photo-album.svg?branch=develop)](https://travis-ci.org/omokaro-faith/photo-album.svg?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/omokaro-faith/photo-album/badge.svg?branch=develop)](https://coveralls.io/github/omokaro-faith/photo-album?branch=develop)
 
 # Alabin
 Alabin is an Application that displays albums of users using data gotten from:
