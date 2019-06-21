@@ -3,6 +3,8 @@ html {
     --default-grey-color: rgb(112, 110, 129);
     --default-blue-color: #47A;
     --default-white-color: #fff;
+    --alert-color: #f44336;
+    --loader-background-color: #f3f3f3;
     --logo-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -165,7 +167,7 @@ a {
 }
 
 .loader {
-    border: 16px solid #f3f3f3;
+    border: 16px solid var(--loader-background-color);
     border-radius: 50%;
     border-top: 16px solid var(--default-blue-color);
     width: 120px;
@@ -236,4 +238,11 @@ a {
 .img-content {
     display: flex;
     justify-content: center
+}
+
+.alert {
+    padding: 20px;
+    background-color: var(--alert-color);
+    color: var(--default-white-color);
+    text-align: center;
 }

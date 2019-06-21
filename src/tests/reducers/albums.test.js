@@ -39,13 +39,13 @@ describe('albumReducer', () => {
     const albumReducerState = {};
     const action = {
       type: 'GET_ALBUMS_ERROR',
-      message: 'Cannot fetch albums'
+      message: true
     }
 
     const state = albumReducer(albumReducerState, action);
     expect(state).toEqual({
       ...albumReducerState,
-      message: 'Cannot fetch albums'
+      message: true
     });
   });
 
@@ -53,13 +53,13 @@ describe('albumReducer', () => {
     const albumReducerState = {};
     const action = {
       type: 'GET_ALL_ALBUMS_ERROR',
-      errorMessage: 'Cannot fetch all albums'
+      errorMessage: true
     }
 
     const state = albumReducer(albumReducerState, action);
     expect(state).toEqual({
       ...albumReducerState,
-      errorMessage: 'Cannot fetch all albums'
+      errorMessage: true
     });
   });
 });

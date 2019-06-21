@@ -22,7 +22,7 @@ describe('setAlbumsError', () => {
     const action = setAlbumsError(albums);
     const expected = {
       type: 'GET_ALBUMS_ERROR',
-      message: 'Cannot fetch albums'
+      message: true
     }
 
   expect(action).toEqual(expected);
@@ -47,7 +47,7 @@ describe('fetchAllAlbumsError', () => {
     const action = fetchAllAlbumsError(albums);
     const expected = {
       type: 'GET_ALL_ALBUMS_ERROR',
-      errorMessage: 'Cannot fetch all albums'
+      errorMessage: true
     }
 
   expect(action).toEqual(expected);
@@ -78,7 +78,7 @@ describe('Async getAlbums', () => {
       })
       .catch(() => {
         expect(store.getActions()[0].type).toEqual('GET_ALBUMS_ERROR');
-        expect(store.getActions()[0].message).toEqual('Cannot fetch albums');
+        expect(store.getActions()[0].message).toEqual(true);
       });
   });
 });

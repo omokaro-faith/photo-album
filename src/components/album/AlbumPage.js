@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import { getUsers }  from '../../actions/users';
 import { DEFAULT_COLOR_PALLETTE, INITIAL_START_VALUE } from '../../constants/constants';
 import { getPageNumbers, getStartPage } from '../../utils/utils';
 import Header from '../header/Header';
+import ErrorDisplay from '../error/ErrorDisplay';
 
 export class AlbumPage extends Component {
   constructor(props) {
@@ -89,7 +90,7 @@ export class AlbumPage extends Component {
 
   render() {
     const { albums, currentPage, itemsPerpage } = this.state;
-    const { totalAlbums } = this.props;
+    const { totalAlbums, errorMessage, message } = this.props;
 
     const renderAlbums = albums.map((album, index) => 
     (
@@ -122,8 +123,13 @@ export class AlbumPage extends Component {
     ));
 
     return (
+      <Fragment>
+      { 
+      (errorMessage || message) &&
+        <ErrorDisplay />
+      }
       <section className="grid">
-      <Header totalItems={totalAlbums} pageName='Albums'/>
+      <Header totalItems={totalAlbums} pageName='Albums' />
         <div className='dropdown-button__wrapper'>
          <Dropdown handleChange={this.handleChange} itemsLength={albums.length}/>
         {renderPageNumbers}
@@ -134,7 +140,8 @@ export class AlbumPage extends Component {
         { renderAlbums } 
        </div>
        : <div className="loader"></div>}
-      </section>  
+      </section> 
+    </Fragment> 
     );
   }
 }
@@ -149,6 +156,8 @@ const mapDispatchToProps = (dispatch) => ({
   albums: state.albums.albums,
   totalAlbums: state.albums.totalAlbums,
   users: state.users.users,
+  errorMessage: state.albums.errorMessage,
+  message: state.albums.message,
 });
 
 

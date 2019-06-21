@@ -1,5 +1,4 @@
 import axios from 'axios';
-import swal from 'sweetalert';
 
 export const setUsers = users => ({
   type: 'GET_USERS',
@@ -8,7 +7,7 @@ export const setUsers = users => ({
 
 export const setUsersError = () => ({
   type: 'GET_USERS_ERROR',
-  message: 'Cannot fetch users'
+  message: true
 });
 
 
@@ -18,7 +17,6 @@ export const getUsers = () => async (dispatch) => {
     const users = await axios.get('https://jsonplaceholder.typicode.com/users');
     return dispatch(setUsers(users.data));
   } catch (error) {
-    swal("An error occured", "Cannot fetch users", "error", { buttons: { cancel: "Close"}});
     return(dispatch(setUsersError()));
   }
 };

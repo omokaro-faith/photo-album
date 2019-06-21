@@ -22,7 +22,7 @@ describe('setPhotosError', () => {
     const action = setPhotoError(photos);
     const expected = {
       type: 'GET_PHOTOS_ERROR',
-      message: 'Cannot fetch photos'
+      message: true
     }
 
   expect(action).toEqual(expected);
@@ -47,7 +47,7 @@ describe('fetchAllPhotosError', () => {
     const action = fetchAllPhotosError(photos);
     const expected = {
       type: 'GET_ALL_PHOTOS_ERROR',
-      errorMessage: 'Cannot fetch all photos'
+      errorMessage: true
     }
 
   expect(action).toEqual(expected);
@@ -78,7 +78,7 @@ describe('Async getPhotos', () => {
       })
       .catch(() => {
         expect(store.getActions()[0].type).toEqual('GET_PHOTOS_ERROR');
-        expect(store.getActions()[0].message).toEqual('Cannot fetch photos');
+        expect(store.getActions()[0].message).toEqual(true);
       });
   });
 })
@@ -106,7 +106,7 @@ describe('Async fetchAllPhotos', () => {
       })
       .catch(() => {
         expect(store.getActions()[0].type).toEqual('GET_ALL_PHOTOS_ERROR');
-        expect(store.getActions()[0].errorMessage).toEqual('Cannot fetch all photos');
+        expect(store.getActions()[0].errorMessage).toEqual(true);
       });
   });
 });

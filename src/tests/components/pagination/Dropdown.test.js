@@ -9,6 +9,7 @@ describe('Dropdown', () => {
   beforeEach(() => {
     props = {
       handleChange: jest.fn(),
+      itemsLength: 2
     };
     wrapper = shallow(<Dropdown {...props}/>);
   });

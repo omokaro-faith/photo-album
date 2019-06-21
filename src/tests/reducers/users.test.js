@@ -26,13 +26,13 @@ describe('usersReducer', () => {
     const userReducerState = {};
     const action = {
       type: 'GET_USERS_ERROR',
-      message: 'Cannot fetch users'
+      message: true
     }
 
     const state = userReducer(userReducerState, action);
     expect(state).toEqual({
       ...userReducerState,
-      message: 'Cannot fetch users'
+      message: true
     });
   });
 });

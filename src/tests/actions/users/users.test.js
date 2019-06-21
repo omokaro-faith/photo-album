@@ -22,7 +22,7 @@ describe('setUsersError', () => {
     const action = setUsersError(users);
     const expected = {
       type: 'GET_USERS_ERROR',
-      message: 'Cannot fetch users'
+      message: true
     }
 
   expect(action).toEqual(expected);
@@ -52,7 +52,7 @@ describe('Async getUsers', () => {
       })
       .catch(() => {
         expect(store.getActions()[0].type).toEqual('GET_USERS_ERROR');
-        expect(store.getActions()[0].message).toEqual('Cannot fetch users');
+        expect(store.getActions()[0].message).toEqual(true);
       });
   });
 })

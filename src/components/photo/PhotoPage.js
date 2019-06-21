@@ -8,6 +8,7 @@ import { getPhotos, fetchAllPhotos } from '../../actions/photo';
 import { getPageNumbers, getStartPage } from '../../utils/utils';
 import { INITIAL_START_VALUE } from '../../constants/constants';
 import Header from '../header/Header';
+import ErrorDisplay from '../error/ErrorDisplay';
 
 
 export class PhotoPage extends Component {
@@ -104,7 +105,7 @@ export class PhotoPage extends Component {
 			},
 		} = this.props;
 		const { show, modalContent, currentPage, itemsPerpage } = this.state;
-		const { totalPhotos } = this.props;
+		const { totalPhotos, errorMessage, message } = this.props;
 		const renderPhotos = photos.map((photo, index) => (
 			<div key={index} className="grid__item" onClick={() => this.showModal({ content: photo })}>
 					<div className="grid__img">
@@ -128,6 +129,11 @@ export class PhotoPage extends Component {
 		));
 
 		return (
+		<Fragment>
+      { 
+      (errorMessage || message) &&
+        <ErrorDisplay />
+      }
 			<section className="grid">
 			<Header totalItems={totalPhotos} pageName='Photos'/>
 				<div className="dropdown-button__wrapper">
@@ -155,6 +161,7 @@ export class PhotoPage extends Component {
 					</div>
 				</Modal>
 			</section>
+			</Fragment>
 		);
 	}
 }
@@ -167,6 +174,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
 	photos: state.photos.photos,
 	totalPhotos: state.photos.totalPhotos,
+	errorMessage: state.photos.errorMessage,
+  message: state.photos.message,
 });
 
 export default connect(

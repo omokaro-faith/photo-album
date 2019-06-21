@@ -39,13 +39,13 @@ describe('photosReducer', () => {
     const photoReducerState = {};
     const action = {
       type: 'GET_PHOTOS_ERROR',
-      message: 'Cannot fetch photo'
+      message: true
     }
 
     const state = photoReducer(photoReducerState, action);
     expect(state).toEqual({
       ...photoReducerState,
-      message: 'Cannot fetch photo'
+      message: true
     });
   });
 
@@ -53,13 +53,13 @@ describe('photosReducer', () => {
     const photoReducerState = {};
     const action = {
       type: 'GET_ALL_PHOTOS_ERROR',
-      errorMessage: 'Cannot fetch all photos'
+      errorMessage: true
     }
 
     const state = photoReducer(photoReducerState, action);
     expect(state).toEqual({
       ...photoReducerState,
-      errorMessage: 'Cannot fetch all photos'
+      errorMessage: true
     });
   });
 });
