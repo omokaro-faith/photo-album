@@ -9,15 +9,6 @@ Array [
 ]
 `;
 
-exports[`Async fetchAllAlbums throws error when album cannot be fetched 1`] = `
-Array [
-  Object {
-    "errorMessage": "Cannot fetch all albums",
-    "type": "GET_ALL_ALBUMS_ERROR",
-  },
-]
-`;
-
 exports[`Async getAlbums gets albums 1`] = `
 Array [
   Object {

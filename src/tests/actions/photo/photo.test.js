@@ -75,10 +75,6 @@ describe('Async getPhotos', () => {
       .then(() => {
         expect(store.getActions()[0].type).toEqual('GET_PHOTOS');
         expect(store.getActions()).toMatchSnapshot();
-      })
-      .catch(() => {
-        expect(store.getActions()[0].type).toEqual('GET_PHOTOS_ERROR');
-        expect(store.getActions()[0].message).toEqual(true);
       });
   });
 })
@@ -103,10 +99,6 @@ describe('Async fetchAllPhotos', () => {
       .then(() => {
         expect(store.getActions()[0].type).toEqual('GET_ALL_PHOTOS');
         expect(store.getActions()).toMatchSnapshot();
-      })
-      .catch(() => {
-        expect(store.getActions()[0].type).toEqual('GET_ALL_PHOTOS_ERROR');
-        expect(store.getActions()[0].errorMessage).toEqual(true);
       });
   });
 });

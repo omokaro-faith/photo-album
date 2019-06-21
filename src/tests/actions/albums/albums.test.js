@@ -65,7 +65,7 @@ describe('Async getAlbums', () => {
     nock.cleanAll();
   });
 
-  it('gets albums',async () => {
+  it('gets albums', async () => {
     nock('https://localhost:8000')
       .get(`jsonplaceholder.typicode.com/albums?_start=${0}&_limit=${5}`)
       .reply(200);
@@ -75,10 +75,6 @@ describe('Async getAlbums', () => {
       .then(() => {
         expect(store.getActions()[0].type).toEqual('GET_ALBUMS');
         expect(store.getActions()).toMatchSnapshot();
-      })
-      .catch(() => {
-        expect(store.getActions()[0].type).toEqual('GET_ALBUMS_ERROR');
-        expect(store.getActions()[0].message).toEqual(true);
       });
   });
 });
