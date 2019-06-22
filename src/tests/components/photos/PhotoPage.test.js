@@ -39,7 +39,7 @@ describe('PhotoPage', () => {
 
     it('sets photos', () => {
       wrapper.setState({
-       photos: photos
+       photos
       });
 
       const result = {
@@ -92,6 +92,14 @@ describe('PhotoPage', () => {
     it('displays the button component', () => {
       const button = wrapper.find(Button);
       expect(button.length).toEqual(1);
+    });
+
+    it('displays the info content', () => {
+      wrapper.setProps({
+        photos
+       });
+      const infoClass = wrapper.find('.info');
+      expect(infoClass.length).toEqual(1);
     });
   });
 })

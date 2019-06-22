@@ -8,7 +8,6 @@ import Modal from '../modal/Modal';
 import { getPhotos, fetchAllPhotos } from '../../actions/photo';
 import { getPageNumbers, getStartPage } from '../../utils/utils';
 import { INITIAL_START_VALUE } from '../../constants/constants';
-import Header from '../header/Header';
 import ErrorDisplay from '../error/ErrorDisplay';
 
 
@@ -56,6 +55,7 @@ export class PhotoPage extends Component {
 	fetchAllPhotos(params.albumId);
 	getPhotos(params.albumId, INITIAL_START_VALUE, itemsPerpage);
 	}
+
 
 	handleChange(event) {
 		const {
@@ -135,16 +135,20 @@ export class PhotoPage extends Component {
       (errorMessage || message) &&
         <ErrorDisplay item='photos'/>
       }
+			{ photos.length >= 1 &&
+			<Fragment>
+			<h3 className='info'>Owner: {albumOwner}</h3>
+				<h3>Album Title: {albumTitle}</h3>
+				<h3>Viewing {photos.length } of {totalPhotos} Photos</h3>
+			</Fragment>
+			}
 			<section className='grid'>
-			<Header totalItems={totalPhotos} pageName='Photos'/>
 				<div className='dropdown-button__wrapper'>
 					<Dropdown handleChange={this.handleChange} itemsLength={photos.length} />
 					{renderPageNumbers}
 				</div>
 				{photos.length >= 1 ? (
 					<Fragment>
-						<h3>Owner: {albumOwner}</h3>
-						<h3>Album Title: {albumTitle}</h3>
 						<div className='grid__container'>{renderPhotos}</div>
 					</Fragment>
 				) : (
@@ -155,11 +159,11 @@ export class PhotoPage extends Component {
 						<img src={`${modalContent.picture}`} alt='defualt-title'/>
 					</div>
 					<div>
-						<h5>
+						<h4>
 							Owner: <span>{albumOwner}</span>
-						</h5>
-						<h5>Title: {modalContent.title}</h5>
-						<h5>Album Title: {albumTitle}</h5>
+						</h4>
+						<h4>Title: {modalContent.title}</h4>
+						<h4>Album Title: {albumTitle}</h4>
 					</div>
 				</Modal>
 			</section>

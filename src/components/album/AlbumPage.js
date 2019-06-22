@@ -9,7 +9,6 @@ import { getAlbums, fetchAllAlbums }  from '../../actions/albums';
 import { getUsers }  from '../../actions/users';
 import { DEFAULT_COLOR_PALLETTE, INITIAL_START_VALUE } from '../../constants/constants';
 import { getPageNumbers, getStartPage } from '../../utils/utils';
-import Header from '../header/Header';
 import ErrorDisplay from '../error/ErrorDisplay';
 
 export class AlbumPage extends Component {
@@ -98,7 +97,6 @@ export class AlbumPage extends Component {
       <div key={uniqueId()} className='grid__item'>
           <Link to={{
           pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
-          state: { AlbumPage: true },
           }}
           >
           <div className='grid__img'>
@@ -129,8 +127,13 @@ export class AlbumPage extends Component {
       (errorMessage || message) &&
         <ErrorDisplay item='albums'/>
       }
+      { albums.length >= 1 &&
+			<Fragment>
+        <h3 className='info'>All Your Albums In A Location</h3>
+        <h3>Viewing {albums.length } of {totalAlbums} Photos</h3>
+			</Fragment>
+			}
       <section className='grid'>
-      <Header totalItems={totalAlbums} pageName='Albums' />
         <div className='dropdown-button__wrapper'>
          <Dropdown handleChange={this.handleChange} itemsLength={albums.length}/>
         {renderPageNumbers}

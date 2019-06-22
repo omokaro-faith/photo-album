@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import '../../styles//components/modal/_modal.css';
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-
   return (
     <div className={showHideClassName} onMouseDown={handleClose}>
       <section className='modal-main'>
