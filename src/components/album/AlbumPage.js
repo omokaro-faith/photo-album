@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import uniqueId from 'lodash/uniqueId';
 import Dropdown from '../pagination/Dropdown';
 import Buttons from '../pagination/Button';
 import { getAlbums, fetchAllAlbums }  from '../../actions/albums';
@@ -94,7 +95,7 @@ export class AlbumPage extends Component {
 
     const renderAlbums = albums.map(album => 
     (
-      <div key={album.albumId} className='grid__item'>
+      <div key={uniqueId()} className='grid__item'>
           <Link to={{
           pathname: `/photo-page/${album.albumId}/${album.title}/${album.owner}`,
           state: { AlbumPage: true },
@@ -114,7 +115,7 @@ export class AlbumPage extends Component {
 
     const renderPageNumbers = getPageNumbers(totalAlbums, itemsPerpage).map((number) => (
        <Buttons 
-        key={number}
+        key={uniqueId()}
         id={number}
         handleClick={this.handleClick}
         pageNumber={number}

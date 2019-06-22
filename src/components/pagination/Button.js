@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import '../../styles/components/paginations/_button.css';
 
-const Button = ({id, handleClick, pageNumber, currentPage}) => (
+const Button = ({id, handleClick, pageNumber, currentPage }) => (
   <div className='buttonwrapper__item'>
     <ul className={(currentPage === pageNumber ? 'buttonwrapper__item--pagination' : 'buttonwrapper__item--pagination-active')}>
       <ol

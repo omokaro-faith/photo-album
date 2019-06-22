@@ -38,6 +38,7 @@ Application was developed using:
 - Run `npm run coverage` to view coverage.
 
 #### To view the production build 
+- Run `npm install`. This installs all the app's dependencies.
 - To build the app run `npm run build`.
 - Run `npm install -g serve`
 - Run `serve -s build` in your terminal
@@ -51,6 +52,7 @@ Application was developed using:
 - Navigate to the root directory e.g $ cd photo-album
 - Make sure you have docker installed
 - Navigate to project directory on your terminal
+- Run `npm install`. This installs all the app's dependencies.
 - Run `docker build -t photo-album-app .`
 - Run `docker run -it -p 8080:80 photo-album-app`
 - View app in port 8080

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import uniqueId from 'lodash/uniqueId';
 import Dropdown from '../pagination/Dropdown';
 import Buttons from '../pagination/Button';
 import Modal from '../modal/Modal';
@@ -107,7 +108,7 @@ export class PhotoPage extends Component {
 		const { show, modalContent, currentPage, itemsPerpage } = this.state;
 		const { totalPhotos, errorMessage, message } = this.props;
 		const renderPhotos = photos.map(photo => (
-			<div key={photo.id} className='grid__item' onClick={() => this.showModal({ content: photo })}>
+			<div key={uniqueId()} className='grid__item' onClick={() => this.showModal({ content: photo })}>
 					<div className='grid__img'>
 						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className='grid__img--item' />
 					</div>
@@ -120,7 +121,7 @@ export class PhotoPage extends Component {
 
 		const renderPageNumbers = getPageNumbers(totalPhotos, itemsPerpage).map(number => (
 			<Buttons
-				key={number}
+				key={uniqueId()}
 				id={number}
 				handleClick={this.handleClick}
 				pageNumber={number}
