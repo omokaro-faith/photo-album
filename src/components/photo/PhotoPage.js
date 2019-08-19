@@ -108,7 +108,7 @@ export class PhotoPage extends Component {
 		const { show, modalContent, currentPage, itemsPerpage } = this.state;
 		const { totalPhotos, errorMessage, message } = this.props;
 		const renderPhotos = photos.map(photo => (
-			<div key={uniqueId()} className='grid__item' onClick={() => this.showModal({ content: photo })}>
+			<div key={uniqueId()} className='grid__item' onClick={this.showModal.bind(this, { content: photo })}>
 					<div className='grid__img'>
 						<img src={`${photo.thumbnailUrl}`} alt={photo.title} className='grid__img--item' />
 					</div>
@@ -130,7 +130,7 @@ export class PhotoPage extends Component {
 		));
 
 		return (
-		<Fragment>
+		<Fragment> 
       { 
       (errorMessage || message) &&
         <ErrorDisplay item='photos'/>
@@ -156,7 +156,7 @@ export class PhotoPage extends Component {
 				)}
 				<Modal show={show} handleClose={this.hideModal}>
 					<div className='img-content'>
-						<img src={`${modalContent.picture}`} alt='defualt-title'/>
+						<img src={`${modalContent.picture}`} alt='default-title' />
 					</div>
 					<div>
 						<h4>

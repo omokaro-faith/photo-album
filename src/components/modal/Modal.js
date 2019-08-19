@@ -4,7 +4,7 @@ import '../../styles//components/modal/_modal.css';
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   return (
-    <div className={showHideClassName} onMouseDown={handleClose}>
+    <div className={showHideClassName}>
       <section className='modal-main'>
         <div className='modal__children'>{children}</div>
       <button onClick={handleClose} className='modal__button'>close</button>
